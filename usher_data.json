@@ -1,0 +1,143 @@
+{
+    "dashboard": {
+      "welcomeMessage": "Welcome to Raiffeisen eBanking Demo",
+      "accountOverview": {
+        "totalBalance": 12000.50,
+        "currency": "CHF",
+        "availableCredit": 5000.00,
+        "lastLogin": "2025-04-10T15:30:00Z"
+      },
+      "notifications": [
+        {
+          "id": "notif1",
+          "type": "info",
+          "message": "Your monthly statement is now available.",
+          "date": "2025-04-01T08:00:00Z"
+        },
+        {
+          "id": "notif2",
+          "type": "warning",
+          "message": "A scheduled maintenance is planned for 2025-04-15.",
+          "date": "2025-04-10T10:00:00Z"
+        }
+      ]
+    },
+    "accounts": [
+      {
+        "accountId": "ACC123456",
+        "accountType": "Checking",
+        "balance": 6500.25,
+        "currency": "CHF",
+        "iban": "CH9300762011623852957",
+        "transactions": [
+          {
+            "transactionId": "TXN001",
+            "date": "2025-04-09T12:00:00Z",
+            "description": "Payment to Grocery Store",
+            "amount": -75.50,
+            "currency": "CHF",
+            "balanceAfter": 6424.75,
+            "category": "Food & Dining"
+          },     
+          {
+            "transactionId": "TXN002",
+            "date": "2025-04-08T16:30:00Z",
+            "description": "Salary Deposit",
+            "amount": 1500.00,
+            "currency": "CHF",
+            "balanceAfter": 6500.25,
+            "category": "Income"
+          }
+        ]
+      },
+      {
+        "accountId": "ACC654321",
+        "accountType": "Savings",
+        "balance": 5500.25,
+        "currency": "CHF",
+        "iban": "CH9300762011623852958"
+      }
+    ],
+    "assets": [
+      {
+        "assetId": "ASSET1",
+        "assetName": "Swiss Equity Fund",
+        "assetType": "Mutual Fund",
+        "isin": "CH1234567890",
+        "currentValue": 10500.25,
+        "currency": "CHF",
+        "performance": {
+          "daily": 0.25,
+          "monthly": 3.5,
+          "yearly": 7.2
+        }
+      },
+      {
+        "assetId": "ASSET2",
+        "assetName": "Global Stock Portfolio",
+        "assetType": "Stock",
+        "isin": "US0987654321",
+        "currentValue": 20250.75,
+        "currency": "USD",
+        "performance": {
+          "daily": -0.35,
+          "monthly": 1.5,
+          "yearly": 5.8
+        }
+      }
+    ],
+    "transactions": [
+      {
+        "transactionId": "TXN003",
+        "date": "2025-04-07T09:15:00Z",
+        "description": "Utility Bill Payment",
+        "amount": -120.00,
+        "currency": "CHF",
+        "accountId": "ACC123456",
+        "category": "Utilities"
+      },
+      {
+        "transactionId": "TXN004",
+        "date": "2025-04-06T14:00:00Z",
+        "description": "Coffee Shop",
+        "amount": -5.75,
+        "currency": "CHF",
+        "accountId": "ACC123456",
+        "category": "Dining"
+      }
+    ],
+    "loans": [
+      {
+        "loanId": "LN001",
+        "loanType": "Personal Loan",
+        "principal": 10000.00,
+        "remainingBalance": 8000.00,
+        "interestRate": 5.5,
+        "currency": "CHF",
+        "nextPaymentDate": "2025-05-01T00:00:00Z"
+      }
+    ],
+    "investments": {
+      "stocks": [
+        {
+          "investmentId": "STK001",
+          "name": "Tech Innovators Inc.",
+          "ticker": "TII",
+          "shares": 50,
+          "purchasePrice": 200.00,
+          "currentPrice": 210.00,
+          "currency": "USD"
+        }
+      ],
+      "bonds": [
+        {
+          "investmentId": "BND001",
+          "name": "Government Bond 2030",
+          "faceValue": 1000.00,
+          "yield": 2.5,
+          "currentValue": 1025.00,
+          "currency": "CHF"
+        }
+      ]
+    }
+  }
