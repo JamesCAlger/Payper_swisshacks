@@ -72,11 +72,4 @@
 
 ---
 
-## 📫 Contact
-
-For partnership or follow-up demos, reach out via [LinkedIn](https://www.linkedin.com/in/shohailismail/) or email at [shohailusman@gmail.com].
-
----
-
-> `Raffael` — not just a chatbot.  
-> An **understated engine** for better banking decisions.
+> `Raffael` : **the CFO in your pocket**
