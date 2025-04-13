@@ -1,0 +1,505 @@
+{
+  "name": "Rafael",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nMy name is Rafael. How can I assist you today?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        1400,
+        -600
+      ],
+      "id": "2f7fe891-d2ba-46ab-8b1f-71e883550749",
+      "name": "When chat message received",
+      "webhookId": "69da4771-6124-4cfd-ade3-055cd0744166"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2296,
+        20
+      ],
+      "id": "f2dec3d2-e985-418c-8a63-2e36e044f7c4",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2176,
+        20
+      ],
+      "id": "26723c63-0951-4381-90da-5c8f46a4022d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "lQzj2f8Y7aDcGDlm",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1708,
+        -380
+      ],
+      "id": "900bf8fc-07a4-4999-86ad-51fe950a85d5",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "lQzj2f8Y7aDcGDlm",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "o3-mini",
+          "mode": "list",
+          "cachedResultName": "o3-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1996,
+        -880
+      ],
+      "id": "2c0d4d29-e14f-4c9b-9d81-1c29013d397e",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "OhulMUURgio8VTSb",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2116,
+        -880
+      ],
+      "id": "553507e3-609d-4132-903f-eea98f8c743e",
+      "name": "Simple Memory1",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "o3-mini",
+          "mode": "list",
+          "cachedResultName": "o3-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        2176,
+        -480
+      ],
+      "id": "12193ba9-65b3-410c-8914-17840cc30344",
+      "name": "OpenAI Chat Model4",
+      "credentials": {
+        "openAiApi": {
+          "id": "OhulMUURgio8VTSb",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2296,
+        -480
+      ],
+      "id": "7961cdfc-88a0-4c80-bf70-e4ca650729d3",
+      "name": "Simple Memory3",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Based on the user's query: {{ $('When chat message received').item.json.chatInput }}\n\nand the personal data JSON tool, identify the user's needs and identify an investment solution with a an appropriate risk/reward tradeoff. provide exact numbers in your summary suggestion for moving money between different accounts and investments.  \n\nOnce the user is satisfied with the new portfolio, ask them if they want to implement immediately or discuss with an adviser in person. if they want immediate implementation edit usher_data.json in github, otherwise send an email to vogelmatthiasraiffeisen@gmail.com with a summary of the client's requests and the suggested portfolio composition.",
+        "options": {
+          "systemMessage": "You are a friendly, experienced investment advisor for Raiffeisen. Your task is to give short, human-sounding investment recommendations based on the client's personal banking data and current investments, in a way that allows the user to approve or change the recommended portfolio. If the user agrees to the portfolio, \nindicate the changes have been made and  Use the provided JSON data to review key points such as account balances, recent transactions, and especially the 'investments' field. If some information is missing, like their areas areas of interest (e.g. tech, green investments) ask in a friendly way. Keep your answers concise (2-3 sentences) and very natural, as if you are chatting with a client in person. Always use the data provided; for example, refer directly to the current investments and balance information in the JSON. If the data shows current investments in stocks and bonds, incorporate that into your advice. If not, ask simple follow-up questions to clarify the client's interests. \n\nOnce the client is satisfied with the portfolio, ask them whether they would like the implementation to happen now or whether they would like to speak to an adviser before implementation. if they indicate they want it to happen now, edit the JSON in github to reflect the new portfolio balance. If they indicate they want to meet an aviser, send an email to vogelmatthiasraiffeisen@gmail.com with a summary of the client's requests and the suggested portfolio composition.\n\nonce done, ask if there is anything else you can help with today"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        2148,
+        -1100
+      ],
+      "id": "fe44499c-9faf-4a5e-b4a7-0ff79bab455b",
+      "name": "Investment Specialist"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User Question: {{ $('When chat message received').item.json.chatInput }}\nUser Data: {\n  \"dashboard\": {\n    \"welcomeMessage\": \"Welcome to Raiffeisen eBanking Demo\",\n    \"accountOverview\": {\n      \"totalBalance\": 12000.50,\n      \"currency\": \"CHF\",\n      \"availableCredit\": 5000.00,\n      \"lastLogin\": \"2025-04-10T15:30:00Z\"\n    },\n    \"notifications\": [\n      {\n        \"id\": \"notif1\",\n        \"type\": \"info\",\n        \"message\": \"Your monthly statement is now available.\",\n        \"date\": \"2025-04-01T08:00:00Z\"\n      },\n      {\n        \"id\": \"notif2\",\n        \"type\": \"warning\",\n        \"message\": \"A scheduled maintenance is planned for 2025-04-15.\",\n        \"date\": \"2025-04-10T10:00:00Z\"\n      }\n    ]\n  },\n  \"accounts\": [\n    {\n      \"accountId\": \"ACC123456\",\n      \"accountType\": \"Checking\",\n      \"balance\": 6500.25,\n      \"currency\": \"CHF\",\n      \"iban\": \"CH9300762011623852957\",\n      \"transactions\": [\n        {\n          \"transactionId\": \"TXN001\",\n          \"date\": \"2025-04-09T12:00:00Z\",\n          \"description\": \"Payment to Grocery Store\",\n          \"amount\": -75.50,\n          \"currency\": \"CHF\",\n          \"balanceAfter\": 6424.75,\n          \"category\": \"Food & Dining\"\n        },\t\n        {\n          \"transactionId\": \"TXN002\",\n          \"date\": \"2025-04-08T16:30:00Z\",\n          \"description\": \"Salary Deposit\",\n          \"amount\": 1500.00,\n          \"currency\": \"CHF\",\n          \"balanceAfter\": 6500.25,\n          \"category\": \"Income\"\n        }\n      ]\n    },\n    {\n      \"accountId\": \"ACC654321\",\n      \"accountType\": \"Savings\",\n      \"balance\": 5500.25,\n      \"currency\": \"CHF\",\n      \"iban\": \"CH9300762011623852958\"\n    }\n  ],\n  \"assets\": [\n    {\n      \"assetId\": \"ASSET1\",\n      \"assetName\": \"Swiss Equity Fund\",\n      \"assetType\": \"Mutual Fund\",\n      \"isin\": \"CH1234567890\",\n      \"currentValue\": 10500.25,\n      \"currency\": \"CHF\",\n      \"performance\": {\n        \"daily\": 0.25,\n        \"monthly\": 3.5,\n        \"yearly\": 7.2\n      }\n    },\n    {\n      \"assetId\": \"ASSET2\",\n      \"assetName\": \"Global Stock Portfolio\",\n      \"assetType\": \"Stock\",\n      \"isin\": \"US0987654321\",\n      \"currentValue\": 20250.75,\n      \"currency\": \"USD\",\n      \"performance\": {\n        \"daily\": -0.35,\n        \"monthly\": 1.5,\n        \"yearly\": 5.8\n      }\n    }\n  ],\n  \"transactions\": [\n    {\n      \"transactionId\": \"TXN003\",\n      \"date\": \"2025-04-07T09:15:00Z\",\n      \"description\": \"Utility Bill Payment\",\n      \"amount\": -120.00,\n      \"currency\": \"CHF\",\n      \"accountId\": \"ACC123456\",\n      \"category\": \"Utilities\"\n    },\n    {\n      \"transactionId\": \"TXN004\",\n      \"date\": \"2025-04-06T14:00:00Z\",\n      \"description\": \"Coffee Shop\",\n      \"amount\": -5.75,\n      \"currency\": \"CHF\",\n      \"accountId\": \"ACC123456\",\n      \"category\": \"Dining\"\n    }\n  ],\n  \"loans\": [\n    {\n      \"loanId\": \"LN001\",\n      \"loanType\": \"Personal Loan\",\n      \"principal\": 10000.00,\n      \"remainingBalance\": 8000.00,\n      \"interestRate\": 5.5,\n      \"currency\": \"CHF\",\n      \"nextPaymentDate\": \"2025-05-01T00:00:00Z\"\n    }\n  ],\n  \"investments\": {\n    \"stocks\": [\n      {\n        \"investmentId\": \"STK001\",\n        \"name\": \"Tech Innovators Inc.\",\n        \"ticker\": \"TII\",\n        \"shares\": 50,\n        \"purchasePrice\": 200.00,\n        \"currentPrice\": 210.00,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"bonds\": [\n      {\n        \"investmentId\": \"BND001\",\n        \"name\": \"Government Bond 2030\",\n        \"faceValue\": 1000.00,\n        \"yield\": 2.5,\n        \"currentValue\": 1025.00,\n        \"currency\": \"CHF\"\n      }\n    ]\n  },\n  \"profile\": {\n    \"customerId\": \"99999999\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+41 79 123 4567\",\n    \"address\": {\n      \"street\": \"Example Street 1\",\n      \"city\": \"Bern\",\n      \"postalCode\": \"3000\",\n      \"country\": \"Switzerland\"\n    }\n  },\n  \"settings\": {\n    \"language\": \"de\",\n    \"theme\": \"light\",\n    \"security\": {\n      \"twoFactorAuth\": true,\n      \"loginAlerts\": true\n    }\n  },\n  \"meta\": {\n    \"dataTimestamp\": \"2025-04-11T10:00:00Z\",\n    \"server\": \"demo.raiffeisen.ch\",\n    \"version\": \"1.0\"\n  }\n}\n",
+        "options": {
+          "systemMessage": "You are a friendly, experienced mortgage advisor for Raiffeisen. Your task is to give short, human-sounding mortgage advice based on the client's personal banking data and the detailed mortgage product information provided by Raiffeisen. Use the provided JSON data to review key aspects such as account balances, available credit, recent transactions, and any existing loan details. Also, incorporate the Raiffeisen mortgage product information, which covers variable and fixed-rate mortgages, as well as details about interest trends, risks, and next steps.\\n\\nFor example, if the client has an available credit of CHF 5000 and a current personal loan, you might say something like: 'I see you have CHF 5000 in available credit and an active personal loan. If you're planning to finance a property, you may want to explore our variable mortgage options, which offer flexibility with market-adjusted rates. Could you share more details about your property plans or your preferred mortgage type?'\\n\\nKeep your answer concise—about 2–3 sentences—and very natural, as if you're chatting face-to-face with a client. Always use the data provided. If some information is missing—such as details on your property or your mortgage objectives—ask in a friendly manner: 'Could you tell me more about your plans or the type of mortgage you're looking for?'"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        2148,
+        -700
+      ],
+      "id": "7aa55c59-ef40-4573-87a0-1848b155c94f",
+      "name": "Mortgage Specialist"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a financial advisor asking clarifying questions to individuals asking about personal banking. Your objective is to determine whether they are looking for financial advice on investing their capital, taking out a mortgage, or opening an account. Use {{ $json.chatInput }} and the personal data available to you to determine what the user wants"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        2148,
+        -200
+      ],
+      "id": "56d81b10-3115-4348-a01a-5d5e5a282afc",
+      "name": "Follow-up Specialist",
+      "alwaysOutputData": false,
+      "notes": "You are a domain classification model. Classify the user’s query into exactly one of the following: Invest, Mortgage, AccountCreation, Rest. The first word of your output should be one of these words, followed by a summarized chat history using the summarization tool. "
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.chatInput }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Invest",
+              "description": "the user's prompt indicates they want to invest their money, savings, and other related activities"
+            },
+            {
+              "category": "Mortgage",
+              "description": "the user's prompt indicates they want to take a mortgage or view different mortgage products offered"
+            }
+          ]
+        },
+        "options": {
+          "fallback": "other",
+          "systemPromptTemplate": "Please classify the text provided by the user into one of the following categories: {categories}, and use the provided formatting instructions below. Don't explain, and only output the json."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        -600
+      ],
+      "id": "cf5caddf-6e57-4033-9a28-d0130c767212",
+      "name": "Router Agent"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "get information on user from github formatted as JSON",
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/JamesCAlger",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "https://github.com/JamesCAlger/Payper_swisshacks",
+          "mode": "url"
+        },
+        "filePath": "usher_data.json",
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.githubTool",
+      "typeVersion": 1,
+      "position": [
+        2236,
+        -880
+      ],
+      "id": "650c50b4-8999-444c-99c9-bff1adf94e56",
+      "name": "GitHub1",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "R43QUM4dvt3wL7fD",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/JamesCAlger/Payper_swisshacks",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "https://github.com/JamesCAlger/Payper_swisshacks",
+          "mode": "url"
+        },
+        "filePath": "usher_data.json",
+        "fileContent": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('File_Content', ``, 'string') }}",
+        "commitMessage": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Commit_Message', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.githubTool",
+      "typeVersion": 1,
+      "position": [
+        2356,
+        -880
+      ],
+      "id": "a1a4a825-c6e8-4267-84b9-ab3acec13d34",
+      "name": "GitHub",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "R43QUM4dvt3wL7fD",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "vogelmatthiasraiffeisen@gmail.com",
+        "subject": "Client Meeting",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        2476,
+        -880
+      ],
+      "id": "d787a4c7-92c9-44e2-b15a-24cc547c960a",
+      "name": "Gmail",
+      "webhookId": "74ec1160-0b3a-493f-907f-70dd3b8c27d9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "vRy7kDJef34GPYJ0",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Router Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Follow-up Specialist",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Follow-up Specialist",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Router Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Investment Specialist",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Investment Specialist",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Mortgage Specialist",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "Mortgage Specialist",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Follow-up Specialist": {
+      "main": [
+        []
+      ]
+    },
+    "Router Agent": {
+      "main": [
+        [
+          {
+            "node": "Investment Specialist",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mortgage Specialist",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Follow-up Specialist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Investment Specialist",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Investment Specialist": {
+      "main": [
+        []
+      ]
+    },
+    "GitHub": {
+      "ai_tool": [
+        [
+          {
+            "node": "Investment Specialist",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Investment Specialist",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c8dd099e-2ff8-4973-8f8c-46b9dee93661",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "67a4e9adfa939040e0ec10c7f371f6e585bc4771b43fc6bc2fdcb61fc6a7921f"
+  },
+  "id": "DDKsoxluY0NKODC9",
+  "tags": []
+}
