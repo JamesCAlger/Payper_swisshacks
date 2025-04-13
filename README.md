@@ -1,12 +1,12 @@
 # Raffael: agentic intelligence for personal finance
 
-`Raffael` is an intelligent, agentic AI system designed to help users make complex financial decisions with clarity and confidence. Built during the 3-day SWSwissHacks 2024 for Raiffeisen Switzerland, `Raffael` transforms static banking interfaces into personalised, proactive financial experiences.
+`Raffael` is an intelligent, agentic AI system designed to help users make complex financial decisions with clarity and confidence. Built during the 3-day SwissHacks 2024 for Raiffeisen Switzerland, `Raffael` transforms static banking interfaces into personalised, proactive financial experiences.
 
 ---
 
 ## How it works
 
-Raffael uses AI agents, real-time user profiling, and contextual orchestration to:
+`Raffael` uses AI agents, real-time user profiling, and contextual orchestration to:
 
 - Analyse user behaviour and financial data
 - Recommend relevant financial products (e.g., mortgages, investments, pensions)
@@ -78,5 +78,5 @@ For partnership or follow-up demos, reach out via [LinkedIn](https://www.linkedi
 
 ---
 
-> Raffael — not just a chatbot.  
+> `Raffael` — not just a chatbot.  
 > An **understated engine** for better banking decisions.
