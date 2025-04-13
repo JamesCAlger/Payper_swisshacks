@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raiffeisen Bank</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #fdfdfd;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background-color: #eee;
+      padding: 10px 30px;
+      font-size: 0.95rem;
+    }
+
+    .top-bar a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .top-bar a:hover {
+      color: #ef3e42;
+    }
+
+    .user-icon {
+      margin-left: 20px;
+      width: 28px;
+      height: 28px;
+      background-color: #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    header {
+      background-image: url('img1.jpg');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 300px 20px;
+      color: white;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 2px;
+    }
+
+    .talk-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 14px 36px;
+      background: #ef3e42;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .talk-btn:hover {
+      background: #c52d30;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 500px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ef3e42;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-section {
+      background: #fff;
+      padding: 70px 20px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .search-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: #222;
+    }
+
+    .inputs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .inputs input,
+    .inputs button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 60px;
+      flex-wrap: wrap;
+      background: #f9f9f9;
+    }
+
+    .text-block {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+      padding-right: 40px;
+    }
+
+    .text-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    .text-block p {
+      color: #555;
+      font-size: 1.2rem;
+    }
+
+    .image-block {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+    }
+
+    .image-block img {
+      width: 60%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .mortgage-section {
+      background-image: url('img3.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 150px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+    }
+
+    .mortgage-box {
+      background: white;
+      color: black;
+      padding: 70px;
+      max-width: 600px;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .mortgage-box h2 {
+      font-size: 2.8rem;
+      color: #ef3e42;
+      margin-bottom: 20px;
+    }
+
+    .mortgage-box p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+
+    .consult-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 30px;
+      background: #ef3e42;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .consult-btn:hover {
+      background: #b20000;
+    }
+
+    footer {
+      padding: 60px 20px;
+      background: #f2f2f2;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <a href="#">MemberPlus</a>
+    <a href="#">Stock Exchange</a>
+    <a href="#">E-banking</a>
+    <div class="user-icon">U</div>
+  </div>
+
+  <header>
+    <h2>WELCOME TO</h2>
+    <h1>RAIFFEISEN</h1>
+    <a class="talk-btn" onclick="document.querySelector('.popup').style.display = 'flex'">TALK TO US</a>
+  </header>
+
+  <section class="search-section">
+    <h2>Your local bank</h2>
+    <div class="inputs">
+      <input type="text" placeholder="Postal code or city">
+      <button>Opening hours</button>
+      <button>Locations and ATMs</button>
+    </div>
+  </section>
+
+  <section class="main-content">
+    <div class="text-block">
+      <h3>Step into the home you’ve always dreamed of — your new beginning starts here.</h3>
+      <p>Find the perfect place to call home with a team that understands your vision and makes it a reality. With expert guidance, attention to detail, and a passion for matching people with the right homes, you're in the best hands.</p>
+    </div>
+    <div class="image-block">
+      <img src="img2.jpg" alt="Family">
+    </div>
+  </section>
+
+  <section class="mortgage-section">
+    <div class="mortgage-box">
+      <h2>Mortgages</h2>
+      <p>Get an overview of the interest rates and their development for the individual mortgage models.</p>
+      <a class="consult-btn" href="#">Arrange a consultation</a>
+    </div>
+  </section>
+
+  <div class="popup" onclick="this.style.display='none'">
+    <div class="popup-content" onclick="event.stopPropagation()">
+      <h2>Talk to Us</h2>
+      <p>We're here to help! Contact a representative or visit your nearest branch.</p>
+      <button class="close-btn" onclick="document.querySelector('.popup').style.display = 'none'">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Raiffeisen Switzerland</p>
+    <p>Help & Contact | Change of Address | Legal notice | Data protection</p>
+  </footer>
+</body>
+
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+   <style>
+       :root {
+ /* Colors */
+ --chat--color-primary: #ef3e42;
+ --chat--color-primary-shade-50: #db4061;
+ --chat--color-primary-shade-100: #cf3c5c;
+ --chat--color-secondary: #ef3e42;
+ --chat--color-secondary-shade-50: #1ca08a;
+ --chat--color-white: #ffffff;
+ --chat--color-light: #f2f4f8;
+ --chat--color-light-shade-50: #e6e9f1;
+ --chat--color-light-shade-100: #c2c5cc;
+ --chat--color-medium: #d2d4d9;
+ --chat--color-dark: #080808;
+ --chat--color-disabled: #777980;
+ --chat--color-typing: #404040;
+
+
+ /* Base Layout */
+ --chat--spacing: 1rem;
+ --chat--border-radius: 0.25rem;
+ --chat--transition-duration: 0.15s;
+
+
+ /* Window Dimensions */
+ --chat--window--width: 400px;
+ --chat--window--height: 600px;
+ --chat--window--bottom: var(--chat--spacing);
+ --chat--window--right: var(--chat--spacing);
+ --chat--window--z-index: 9999;
+ --chat--window--border: 1px solid var(--chat--color-light-shade-50);
+ --chat--window--border-radius: var(--chat--border-radius);
+ --chat--window--margin-bottom: var(--chat--spacing);
+
+
+ /* Header Styles */
+ --chat--header-height: auto;
+ --chat--header--padding: var(--chat--spacing);
+ --chat--header--background: var(--chat--color-dark);
+ --chat--header--color: var(--chat--color-light);
+ --chat--header--border-top: none;
+ --chat--header--border-bottom: none;
+ --chat--header--border-left: none;
+ --chat--header--border-right: none;
+ --chat--heading--font-size: 2em;
+ --chat--subtitle--font-size: inherit;
+ --chat--subtitle--line-height: 1.8;
+
+
+ /* Message Styles */
+ --chat--message--font-size: 1rem;
+ --chat--message--padding: var(--chat--spacing);
+ --chat--message--border-radius: var(--chat--border-radius);
+ --chat--message-line-height: 1.5;
+ --chat--message--margin-bottom: calc(var(--chat--spacing) * 1);
+ --chat--message--bot--background: var(--chat--color-white);
+ --chat--message--bot--color: var(--chat--color-dark);
+ --chat--message--bot--border: none;
+ --chat--message--user--background: var(--chat--color-secondary);
+ --chat--message--user--color: var(--chat--color-white);
+ --chat--message--user--border: none;
+ --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+ --chat--messages-list--padding: var(--chat--spacing);
+
+
+ /* Toggle Button */
+ --chat--toggle--size: 64px;
+ --chat--toggle--width: var(--chat--toggle--size);
+ --chat--toggle--height: var(--chat--toggle--size);
+ --chat--toggle--border-radius: 50%;
+ --chat--toggle--background: var(--chat--color-primary);
+ --chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+ --chat--toggle--active--background: var(--chat--color-primary-shade-100);
+ --chat--toggle--color: var(--chat--color-white);
+
+
+ /* Input Area */
+ --chat--textarea--height: 50px;
+ --chat--textarea--max-height: 30rem;
+ --chat--input--font-size: inherit;
+ --chat--input--border: 0;
+ --chat--input--border-radius: 0;
+ --chat--input--padding: 0.8rem;
+ --chat--input--background: var(--chat--color-white);
+ --chat--input--text-color: initial;
+ --chat--input--line-height: 1.5;
+ --chat--input--placeholder--font-size: var(--chat--input--font-size);
+ --chat--input--border-active: 0;
+ --chat--input--left--panel--width: 2rem;
+
+
+ /* Button Styles */
+ --chat--button--color: var(--chat--color-light);
+ --chat--button--background: var(--chat--color-primary);
+ --chat--button--padding: calc(var(--chat--spacing) * 1 / 2) var(--chat--spacing);
+ --chat--button--border-radius: var(--chat--border-radius);
+ --chat--button--hover--color: var(--chat--color-light);
+ --chat--button--hover--background: var(--chat--color-primary-shade-50);
+ --chat--close--button--color-hover: var(--chat--color-primary);
+
+
+ /* Send and File Buttons */
+ --chat--input--send--button--background: var(--chat--color-white);
+ --chat--input--send--button--color: var(--chat--color-light);
+ --chat--input--send--button--background-hover: var(--chat--color-primary-shade-50);
+ --chat--input--send--button--color-hover: var(--chat--color-secondary-shade-50);
+ --chat--input--file--button--background: var(--chat--color-white);
+ --chat--input--file--button--color: var(--chat--color-secondary);
+ --chat--input--file--button--background-hover: var(--chat--input--file--button--background);
+ --chat--input--file--button--color-hover: var(--chat--color-secondary-shade-50);
+ --chat--files-spacing: 0.25rem;
+
+
+ /* Body and Footer */
+ --chat--body--background: var(--chat--color-light);
+ --chat--footer--background: var(--chat--color-light);
+ --chat--footer--color: var(--chat--color-dark);
+}
+
+
+
+
+/* You can override any class styles, too. Right-click inspect in Chat UI to find class to override. */
+.chat-message {
+   max-width: 50%;
+}
+     </style>
+   <script type="module">
+       import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+
+       createChat({
+           webhookUrl: 'https://blueobsidian.app.n8n.cloud/webhook/69da4771-6124-4cfd-ade3-055cd0744166/chat',
+           webhookConfig: {
+               method: 'POST',
+               headers: {}
+           },
+           target: '#n8n-chat',
+           mode: 'window',
+           chatInputKey: 'chatInput',
+           chatSessionKey: 'sessionId',
+           metadata: {},
+           showWelcomeScreen: false,
+           defaultLanguage: 'en',
+           initialMessages: [
+               'Hi there! 👋',
+               'My name is Rafael. How can I assist you today?'
+           ],
+           i18n: {
+               en: {
+                   title: 'Hi there! 👋',
+                   subtitle: "Start a chat. We're here to help you 24/7.",
+                   footer: '',
+                   getStarted: 'New Conversation',
+                   inputPlaceholder: 'Type your question..',
+               },
+           }
+       });
+   </script>
+
+
+</html>
